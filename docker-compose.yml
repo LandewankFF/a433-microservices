@@ -15,4 +15,4 @@ services:
       - app-db:/data/db
 
 volumes:
-  app-db:s
+  app-db:
