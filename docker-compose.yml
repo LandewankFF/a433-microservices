@@ -1,0 +1,18 @@
+version: "2"
+services:
+# nama image, port yang berjalan serta bergantung pada item db
+  item-app:
+    image: dicodinglff/item-app:v1
+    ports:
+      - "80:8080"
+    depends_on:
+      - item-db
+
+# menggunakan database mongodb versi3
+  item-db:
+    image: mongo:3
+    volumes:
+      - app-db:/data/db
+
+volumes:
+  app-db:s
