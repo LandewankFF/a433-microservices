@@ -1,1 +1,1 @@
-Docker Hub: https://hub.docker.com/repository/docker/dicodinglff/item-app 
+https://hub.docker.com/repository/docker/dicodinglff/item-app

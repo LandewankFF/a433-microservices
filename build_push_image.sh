@@ -10,10 +10,10 @@ docker build -t item-app:v1 .
 restart: always
 
 # Mengubah nama image sesuai format Docker Hub
-docker tag item-app:v1 dicodinglff/proyek-pertama:v1
+docker tag item-app:v1 dicodinglff/item-app:v1
 
 # Mengunggah image ke Docker Hub
-docker push dicodinglff/proyek-pertama:v1
+docker push dicodinglff/item-app:v1
 
 ## Set environment variable for Docker Hub password
 export PASSWORD_DOCKER_HUB=webprogramming
