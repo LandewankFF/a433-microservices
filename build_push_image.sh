@@ -15,5 +15,6 @@ docker tag item-app:v1 dicodinglff/proyek-pertama:v1
 # Mengunggah image ke Docker Hub
 docker push dicodinglff/proyek-pertama:v1
 
+echo $PASSWORD_DOCKER_HUB | docker login -u dicodinglff --password-stdin
 #menampilkan daftar images
 docker images
