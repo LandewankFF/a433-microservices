@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: mongo
+
+spec:
+  selector:
+    matchLabels:
+    # Selector untuk menemukan pod yang sesuai
+      app: mongo 
+  serviceName: "mongo"
+  replicas: 3 # Jumlah replika dari pod
+  
+  template:
+    metadata:
+     # Label yang digunakan oleh pod
+      labels:
+        app: mongo
+
+    spec:
+      containers:
+        - name: mongo # nama kontainer
+         # Nama dan versi gambar Docker yang digunakan
+          image: mongo:latest
+          # Port yang di-ekspos oleh container
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-credentials
+                  key: MONGO_ROOT_USERNAME
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-credentials
+                  key: MONGO_ROOT_PASSWORD
+          volumeMounts:
+            - name: mongo-persistent-storage
+            # path untuk volume persisten
+              mountPath: /data/db 
+            - name: mongo-config
+            # path untuk volume config
+              mountPath: /config
+            - name: mongo-credentials
+            # path untuk volume secret
+              mountPath: /etc/mongo-credentials
+      volumes:
+        - name: mongodb-persistent-storage
+          persistentVolumeClaim:
+            claimName: mongo-pvc
+        - name: mongodb-secret-mount
+          secret:
+            secretName: mongo-secret
+        - name: mongodb-config-mount
+          configMap:
+            name: mongo-configmap
+            items:
+              - key: mongo.conf
+                path: mongo.conf
