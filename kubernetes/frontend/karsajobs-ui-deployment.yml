@@ -1,0 +1,23 @@
+#  versi Kubernetes API yang digunakan untuk membuat object 
+apiVersion: apps/v1
+# jenis object yaitu  Deployment
+kind: Deployment
+metadata:
+  name: karsajobs-ui-deployment
+#berisi spesifikasi objek
+spec:
+# Jumlah replika (pods) yang akan di-deploy 2
+  replicas: 2
+  selector:
+    matchLabels:
+      app: karsajobs-ui
+  template:
+    metadata:
+      labels:
+        app: karsajobs-ui
+    spec:
+      containers:
+        - name: karsajobs-frontend #nama kontainer
+          image: dicodinglff/karsajobs-ui:latest #nama image
+          ports:
+            - containerPort: 80
