@@ -1,0 +1,10 @@
+# versi Kubernetes API mana yang harus digunakan untuk membuat object dari manifest
+apiVersion: v1
+# jenis object
+kind: Deploy 
+
+#  memberikan informasi tentang data lain.
+metadata:
+  name: karsajobs-deployment
+spec: 
+  container:
