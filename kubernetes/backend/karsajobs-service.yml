@@ -1,0 +1,15 @@
+#  versi Kubernetes API yang digunakan untuk membuat object 
+apiVersion: v1
+kind: my-service
+metadata:
+  name: karsajobs-service
+spec:
+  selector:
+    app: karsajobs
+  ports:
+  #jenis protokol yang digunakan TCP
+    - protocol: TCP
+     # Port yang digunakan di dalam cluster
+      port: 80
+      # Port yang digunakan oleh pod target
+      targetPort: 8080

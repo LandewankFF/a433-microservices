@@ -1,10 +1,39 @@
-# versi Kubernetes API mana yang harus digunakan untuk membuat object dari manifest
-apiVersion: v1
-# jenis object
-kind: Deploy 
-
-#  memberikan informasi tentang data lain.
+#  versi Kubernetes API yang digunakan untuk membuat object 
+apiVersion: apps/v1
+# jenis object yaitu  Deployment
+kind: Deployment
 metadata:
-  name: karsajobs-deployment
-spec: 
-  container:
+  name: karsajobs
+spec:
+# Jumlah replika (pods) yang akan di-deploy
+  replicas: 3
+  selector:
+    matchLabels:
+      app: karsajobs
+  template:
+    metadata:
+      labels:
+        app: karsajobs
+    spec:
+      containers:
+       # Nama container
+        - name: karsajobs-backend
+          image: dicodinglff/karsajobs:latest #nama image
+          ports:
+            - containerPort: 8080 #port yang digunakan kontainer
+          env:
+           # environment untuk konfigurasi aplikasi
+            - name: APP_PORT
+              value: "8080"
+            - name: MONGO_HOST
+              value: "mongo-service" 
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret 
+                  key: MONGO_ROOT_USERNAME
+            - name: MONGO_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret 
+                  key: MONGO_ROOT_PASSWORD
