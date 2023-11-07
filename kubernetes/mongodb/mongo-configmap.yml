@@ -1,0 +1,11 @@
+#  versi Kubernetes API yang digunakan untuk membuat object 
+apiVersion: v1
+# jenis object yaitu  ConfigMap
+kind: ConfigMap
+metadata:
+  name: mongo-configmap
+data:
+ # Konfigurasi MongoDB &  Path untuk menyimpan database
+  mongo.config: |
+    storage:
+      dbPath: /data/db 
