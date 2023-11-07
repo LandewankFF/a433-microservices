@@ -1,0 +1,31 @@
+#  versi 1
+apiVersion: v1
+# jenis object yaitu  PersistentVolume
+kind: PersistentVolume
+metadata:
+  name: mongo-pv
+spec:
+  capacity:
+  # Kapasitas penyimpanan adalah 1 Gigabyte
+    storage: 1Gi
+  accessModes:
+  # Volume hanya dapat dibaca dan ditulis oleh satu node
+    - ReadWriteOnce 
+  # Volume akan tetap ada setelah dihapus
+  persistentVolumeReclaimPolicy: Retain
+  hostPath:
+  # Volume disimpan di path fisik "/mnt/data/mongodb" pada host
+    path: "/mnt/data/mongodb"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+    # Meminta alokasi penyimpanan sebesar 1 Gigabyte
+      storage: 1Gi
