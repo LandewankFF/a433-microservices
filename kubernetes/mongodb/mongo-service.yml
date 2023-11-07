@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: my-service
+metadata:
+  name: mongo-service 
+spec:
+  selector:
+    app: mongo
+  ports:
+  # Port yang digunakan 
+    - protocol: TCP
+    # Port yang digunakan 
+      port: 27017
+      # Port yang digunakan oleh pod target
+      targetPort: 27017
