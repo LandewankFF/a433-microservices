@@ -1,7 +1,7 @@
 #  versi Kubernetes API yang digunakan untuk membuat object 
 apiVersion: v1
 # jenis object yaitu  my-service
-kind: my-service
+kind: service
 metadata:
   name: karsajobs-ui-service
 spec:
