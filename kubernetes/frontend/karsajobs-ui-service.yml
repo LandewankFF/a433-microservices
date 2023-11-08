@@ -11,6 +11,6 @@ spec:
   #jenis protokol yang digunakan TCP
     - protocol: TCP
     # Port yang digunakan 
-      port: 80
+      port: 8080
       # Port yang digunakan oleh pod target
       targetPort: 8080
