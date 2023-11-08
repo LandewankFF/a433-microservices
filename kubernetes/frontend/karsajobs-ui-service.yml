@@ -13,4 +13,4 @@ spec:
     # Port yang digunakan 
       port: 80
       # Port yang digunakan oleh pod target
-      targetPort: 80
+      targetPort: 8080
