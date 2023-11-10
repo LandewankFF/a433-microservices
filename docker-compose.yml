@@ -1,0 +1,40 @@
+version: "3.2"
+services:
+  order-service:
+    image: dicodinglff/order-service:v1
+    ports:
+      - "3000:3000"
+    environment:
+      - AMQP_URL=amqp://rabbitmq:5672
+    depends_on:
+      - rabbitmq
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node index.js'
+    networks:
+      - app_network
+
+  shipping-service:
+    image: dicodinglff/shipping-service:v1
+    ports:
+      - "3001:3001"
+    depends_on:
+      - rabbitmq
+    command: sh -c '/bin/wait-for-it.sh rabbitmq:5672 --timeout=30 -- node index.js'
+    environment:
+      AMQP_URL: amqp://guest:guest@rabbitmq:5672
+    networks:
+      - app_network
+
+  rabbitmq:
+    image: "rabbitmq:3.11-management"
+    container_name: "rabbitmq_container"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    environment:
+      - RABBITMQ_DEFAULT_USER=user
+      - RABBITMQ_DEFAULT_PASS=password
+    networks:
+      - app_network
