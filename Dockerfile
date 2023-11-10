@@ -2,8 +2,8 @@
 FROM node:18-alpine as base
 # Set working directory di dalam container
 WORKDIR /src
-# Copy package.json dan package-lock.json ke dalam container
-COPY package*.json ./
+# Copy semua file dari direktori 
+COPY ..
 
 
 # Stage 2: Production stage
