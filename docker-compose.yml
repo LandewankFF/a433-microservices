@@ -38,3 +38,4 @@ services:
       - RABBITMQ_DEFAULT_PASS=password
     networks:
       - app_network
+  
