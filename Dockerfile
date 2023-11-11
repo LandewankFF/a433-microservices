@@ -34,5 +34,5 @@ RUN chmod +x /bin/wait-for-it.sh
 ENV NODE_ENV=development
 RUN npm install
 COPY ./*.js ./
-# Command untuk menjalankan aplikasi pada mode production
+# Command untuk menjalankan aplikasi pada mode production 
 CMD ["node", "index.js"]
